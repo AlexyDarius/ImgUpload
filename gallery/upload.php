@@ -79,13 +79,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         <div id="status-message"></div>
     </div>
 
+    <div id="image-container">
+    <?php
+        // Connect to the MySQL database (adjust the connection details as per your configuration)
+        $conn = new mysqli("localhost", "root", "root", "img_upload");
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Retrieve image information from the database
+        $sql = "SELECT filename, legend, id FROM images ORDER BY upload_date DESC";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $imagePath = "images/" . $row['filename'];
+                $imageId = $row['id'];
+                $legend = $row['legend'];
+                
+                echo "<div class='image-box'>";
+                echo "<img src='$imagePath' alt='Image'>";
+                echo "<p>$legend</p>";
+                echo "<button class='delete-button' data-image-id='$imageId'>Delete</button>";
+                echo "</div>";
+            }
+        } else {
+            echo "No images found.";
+        }
+
+        $conn->close();
+        ?>
+    </div>
+    <a href="index.php">Home</a>
 
 
     <footer>
         &copy; 2023 Your Website Name
     </footer>
 
-    <script src="js/AJAXForm.js">
+    <script src="js/script.js"></script>
 
 </body>
 </html>

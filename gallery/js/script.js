@@ -47,3 +47,36 @@ function uploadImage(event) {
     // Send the form data as the request body
     xhr.send(formData);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add an event listener to all delete buttons
+    let deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            let imageId = button.getAttribute('data-image-id');
+
+            // Ask for confirmation
+            let confirmation = confirm('Are you sure you want to delete this image?');
+            if (confirmation) {
+                // User clicked "OK" in the confirmation dialog, proceed with deletion
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Image deleted successfully, remove the image from the page
+                        let imageBox = button.closest('.image-box');
+                        imageBox.remove();
+                    } else if (xhr.readyState === 4) {
+                        // Handle error if needed
+                        console.error("Image deletion failed.");
+                    }
+                };
+
+                xhr.open('POST', 'delete_image.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send('image_id=' + imageId);
+            } else {
+                // User clicked "Cancel" in the confirmation dialog, do nothing
+            }
+        });
+    });
+});
