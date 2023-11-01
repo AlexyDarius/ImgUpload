@@ -1,0 +1,14 @@
+._*
+.DS_Store
+.htaccess
+php.ini
+.htpasswd
+**/fonts
+**/img
+*.bsdesign
+/backup
+/dev
+**/favicons
+/namecheap-info
+/shop
+**/pwd
