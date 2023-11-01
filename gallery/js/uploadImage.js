@@ -42,7 +42,7 @@ function uploadImage(event) {
     };
 
     // Open a POST request to the server
-    xhr.open('POST', 'upload.php', true);
+    xhr.open('POST', 'back_office.php', true);
 
     // Send the form data as the request body
     xhr.send(formData);

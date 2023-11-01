@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['image_id'])) {
 
     if (!empty($imageFilename)) {
         // Delete the image file from the server
-        $imagePath = "images/" . $imageFilename;
+        $imagePath = "../images/" . $imageFilename;
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }

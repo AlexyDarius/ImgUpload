@@ -19,7 +19,7 @@ require $_SERVER['DOCUMENT_ROOT']. '/gallery/requires/gallery_displayer.php';
 
     </div>
 
-    <a href="upload.php">Upload</a> <!-- Add the button with a link to login.php -->
+    <a href="back_office.php">Gestion</a> <!-- Add the button with a link to login.php -->
 
     <footer>
         &copy; 2023 Your Website Name
