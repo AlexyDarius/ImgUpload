@@ -7,6 +7,7 @@
 <body>
 
 <?php
+
     session_start();
     if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         header('Location: login.php'); // Redirect to the login page if not authenticated
@@ -15,15 +16,37 @@
 
     // Check if the form was submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
-        $upload_dir = "images/"; // Directory where you want to store uploaded images
-        $uploaded_file = $upload_dir . basename($_FILES['image']['name']);
+    $upload_dir = "images/"; // Directory where you want to store uploaded images
+    $uploaded_file = $upload_dir . basename($_FILES['image']['name']);
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploaded_file)) {
-            echo "Image uploaded successfully!";
-        } else {
-            echo "Image upload failed. Please try again.";
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploaded_file)) {
+        // Image uploaded successfully, now insert the image information into the database
+        $imageFilename = basename($_FILES['image']['name']);
+        $uploadedBy = isset($_SESSION['username']) ? $_SESSION['username'] : ''; // Assuming you have a username in the session
+        
+        // Connect to the MySQL database (adjust the connection details as per your configuration)
+        $conn = new mysqli("localhost", "root", "root", "img_upload");
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
+
+        // Insert image information into the database
+        $sql = "INSERT INTO images (filename, uploaded_by) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $imageFilename, $uploadedBy);
+
+        if ($stmt->execute()) {
+            echo "Image uploaded and information stored in the database!";
+        } else {
+            echo "Image uploaded, but failed to store information in the database. Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conn->close();
+    } else {
+        echo "Image upload failed. Please try again.";
     }
+}
 ?>
 
     <header>

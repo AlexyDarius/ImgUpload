@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($entered_username === $valid_username && password_verify($entered_password, $hashed_password)) {
         $_SESSION['authenticated'] = true;
+        $_SESSION['username'] = $entered_username; // Set the username in the session
         header('Location: ../upload.php'); // Redirect to the opening hours editing page
         exit;
     } else {
