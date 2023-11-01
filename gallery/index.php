@@ -27,7 +27,9 @@
                 $legend = $row['legend'];
                 
                 echo "<div class='image-box'>";
-                echo "<img src='$imagePath' alt='Image'>";
+                echo "<a href='$imagePath' class='image-link'>";
+                echo "<img src='$imagePath' alt='$legend'>";
+                echo "</a>";
                 echo "<p>$legend</p>";
                 echo "</div>";
             }
