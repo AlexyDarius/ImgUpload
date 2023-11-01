@@ -18,17 +18,17 @@
         }
 
         // Retrieve image information from the database
-        $sql = "SELECT filename, uploaded_by FROM images ORDER BY upload_date DESC";
+        $sql = "SELECT filename, legend FROM images ORDER BY upload_date DESC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $imagePath = "images/" . $row['filename'];
-                $uploadedBy = $row['uploaded_by'];
+                $legend = $row['legend'];
                 
                 echo "<div class='image-box'>";
                 echo "<img src='$imagePath' alt='Image'>";
-                echo "<p>Uploaded by: $uploadedBy</p>";
+                echo "<p>$legend</p>";
                 echo "</div>";
             }
         } else {
