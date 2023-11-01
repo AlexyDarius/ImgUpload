@@ -118,11 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         $conn->close();
         ?>
     </div>
-    <!-- <div class="edit-container" style="display: none;">
-        <input type="text" id="edited-legend" placeholder="Edit the legend">
-        <button class="save-button">Save</button>
-        <button class="cancel-button">Cancel</button>
-    </div> -->
     <a href="index.php">Home</a>
 
 

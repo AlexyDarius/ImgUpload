@@ -77,3 +77,8 @@ button {
     border-radius: 3px;
     cursor: pointer;
 }
+
+.edit-container input[type="text"] {
+    max-width: 100%; /* Adjust this value as needed */
+    box-sizing: border-box; /* Keeps the input within its container */
+}
