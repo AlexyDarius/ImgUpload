@@ -30,6 +30,8 @@
         ?>
     </div>
 
+    <a href="login.php" style="margin: 12px;">Login</a> <!-- Add the button with a link to login.php -->
+
     <footer>
         &copy; 2023 Your Website Name
     </footer>
