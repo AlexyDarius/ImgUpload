@@ -49,6 +49,8 @@ function uploadImage(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+
     // Add an event listener to all delete buttons
     let deleteButtons = document.querySelectorAll('.delete-button');
     deleteButtons.forEach(function(button) {
@@ -79,4 +81,59 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+
+    const editButtons = document.querySelectorAll('.edit-button');
+    
+    editButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const imageId = button.getAttribute('data-image-id');
+            const legendElement = document.querySelector('#legend-' + imageId);
+            console.log("image id : " + imageId);
+            const editContainer = document.querySelector(`#edit-container-${imageId}`);
+
+            // Toggle the display of the edit container
+            if (editContainer.style.display === 'none') {
+                editContainer.style.display = 'block';
+            } else {
+                editContainer.style.display = 'none';
+            }
+
+            // Handle "Save" button click
+            const saveButton = document.querySelector('#save-button-' + imageId);
+            saveButton.addEventListener('click', function() {
+                const editedLegend = document.querySelector('#edited-legend-' + imageId).value;
+                // Send an AJAX request to update the database with the edited legend
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Update the legend element with the edited value
+                        legendElement.textContent = editedLegend;
+                        // Hide the edit container
+                        const editContainer = document.querySelector(`#edit-container-${imageId}`);
+                        editContainer.style.display = 'none';
+                    } else if (xhr.readyState === 4) {
+                        // Handle error if needed
+                        console.error("Legend update failed.");
+                    }
+                };
+
+                // Prepare data for the AJAX request
+                const data = new FormData();
+                data.append('image_id', imageId);
+                data.append('legend', editedLegend);
+
+                // Send a POST request to update.php
+                xhr.open('POST', 'update.php', true);
+                xhr.send(data);
+            });
+
+            const cancelButton = document.querySelector('#cancel-button-' + imageId);
+            cancelButton.addEventListener('click', function() {
+                editContainer.style.display = 'none';
+            })
+
+        });
+    });
+
 });

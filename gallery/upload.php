@@ -99,8 +99,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
                 
                 echo "<div class='image-box'>";
                 echo "<img src='$imagePath' alt='Image'>";
-                echo "<p>$legend</p>";
+                echo "<p id='legend-$imageId'>$legend</p>";
                 echo "<button class='delete-button' data-image-id='$imageId'>Delete</button>";
+                echo " <button class='edit-button' data-image-id='$imageId'>Edit</button>";
+
+                echo "<div class='edit-container' id='edit-container-$imageId' style='display: none;'>";
+                echo "<input type='text' id='edited-legend-$imageId' placeholder='Edit the legend'>";
+                echo "<button class='save-button' id='save-button-$imageId' data-image-id='$imageId'>Save</button>";
+                echo "<button class='cancel-button' id='cancel-button-$imageId' data-image-id='$imageId'>Cancel</button>";
+                echo "</div>";
+
                 echo "</div>";
             }
         } else {
@@ -110,6 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         $conn->close();
         ?>
     </div>
+    <!-- <div class="edit-container" style="display: none;">
+        <input type="text" id="edited-legend" placeholder="Edit the legend">
+        <button class="save-button">Save</button>
+        <button class="cancel-button">Cancel</button>
+    </div> -->
     <a href="index.php">Home</a>
 
 
