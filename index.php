@@ -11,26 +11,35 @@
 
     <div id="image-container">
         <?php
-        // You would typically fetch image data from your database here and generate divs accordingly
-        // For this example, we'll create a simple static div for demonstration purposes
-        $imageData = array(
-            array("analytics.webp", "User 1"),
-            array("android.webp", "User 2"),
-            array("apache.webp", "User 3"),
-        );
-
-        foreach ($imageData as $data) {
-            $imagePath = "images/" . $data[0];
-            $userName = $data[1];
-            echo "<div class='image-box'>";
-            echo "<img src='$imagePath' alt='Image'>";
-            echo "<p>Uploaded by: $userName</p>";
-            echo "</div>";
+        // Connect to the MySQL database (adjust the connection details as per your configuration)
+        $conn = new mysqli("localhost", "root", "root", "img_upload");
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
+
+        // Retrieve image information from the database
+        $sql = "SELECT filename, uploaded_by FROM images ORDER BY upload_date DESC";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $imagePath = "images/" . $row['filename'];
+                $uploadedBy = $row['uploaded_by'];
+                
+                echo "<div class='image-box'>";
+                echo "<img src='$imagePath' alt='Image'>";
+                echo "<p>Uploaded by: $uploadedBy</p>";
+                echo "</div>";
+            }
+        } else {
+            echo "No images found.";
+        }
+
+        $conn->close();
         ?>
     </div>
 
-    <a href="login.php" style="margin: 12px;">Login</a> <!-- Add the button with a link to login.php -->
+    <a href="login.php">Login</a> <!-- Add the button with a link to login.php -->
 
     <footer>
         &copy; 2023 Your Website Name
