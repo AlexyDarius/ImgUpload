@@ -4,7 +4,7 @@
 php.ini
 .htpasswd
 **/fonts
-**/img
+**/images
 *.bsdesign
 /backup
 /dev
