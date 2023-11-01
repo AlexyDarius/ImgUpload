@@ -38,7 +38,8 @@
         if ($stmt->execute()) {
             echo "Image uploaded and information stored in the database!";
         } else {
-            echo "Image uploaded, but failed to store information in the database. Error: " . $stmt->error;
+            header("HTTP/1.1 500 Internal Server Error"); // Set a 500 status code for the error
+            echo "Image upload failed. Please try again.";
         }
 
         $stmt->close();
@@ -55,15 +56,20 @@
 
     <!-- Form for uploading images -->
     <div id="upload-container">
-        <form method="post" enctype="multipart/form-data">
-            <label for="image">Select an image to upload:</label>
-            <input type="file" name="image" id="image" accept="image/*" required>
-            <button type="submit">Upload Image</button>
-        </form>
-    </div>
+    <form id="image-upload-form" method="post" enctype="multipart/form-data" onsubmit="uploadImage(event);">
+        <label for="image">Select an image to upload:</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
+    <div id="status-message"></div>
+</div>
+
 
     <footer>
         &copy; 2023 Your Website Name
     </footer>
+
+    <script src="js/AJAXForm.js">
+
 </body>
 </html>
