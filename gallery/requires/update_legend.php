@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
-    header('Location: login.php'); // Redirect to the login page if not authenticated
-    exit;
-}
+
+require $_SERVER['DOCUMENT_ROOT']. '/gallery/auth/checker.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the image ID and edited legend from the POST data

@@ -1,10 +1,6 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
-    header('Location: login.php'); // Redirect to the login page if not authenticated
-    exit;
-}
+require $_SERVER['DOCUMENT_ROOT']. '/gallery/auth/checker.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['image_id'])) {
     // Retrieve the image ID from the POST request
