@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
+<?php
+include "https://dariusdev.fr/includes/head.php"
+?>
+
     <title>Upload images</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body style="--bs-body-bg: #e3f3f5;--bs-body-bg-t: rgba(227, 243, 245, 0.9);--bs-primary: #0c3028;--bs-secondary: #f53219;--bs-primary-t: rgba(12, 48, 40, 0.85);background: var(--bs-body-bg);font-family: Lato-Regular;color: var(--bs-primary);">
 
 <?php
 
 require $_SERVER['DOCUMENT_ROOT']. '/gallery/auth/checker.php';
 require $_SERVER['DOCUMENT_ROOT']. '/gallery/requires/upload_image.php';
 
+?>
+
+<?php
+include "https://dariusdev.fr/includes/navbar.php"
 ?>
 
     <header>
@@ -49,6 +54,10 @@ require $_SERVER['DOCUMENT_ROOT']. '/gallery/requires/back_office_display.php';
 
     <script src="js/script.js"></script>
     <script src="js/uploadImage.js"></script>
+
+<?php
+include "https://dariusdev.fr/includes/footer.php"
+?>
 
 </body>
 </html>
