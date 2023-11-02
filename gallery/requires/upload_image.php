@@ -29,17 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $stmt->bind_param("sss", $imageFilename, $uploadedBy, $legend);
 
             if ($stmt->execute()) {
-                echo "Image uploaded and information stored in the database!";
+                echo "Image téléchargée et information stockées !";
             } else {
                 header("HTTP/1.1 500 Internal Server Error");
-                echo "Image uploaded, but failed to store information in the database. Please try again.";
+                echo "Image téléchargée mais il est impossible de stocker les informations. Réessayez.";
             }
 
             $stmt->close();
             $conn->close();
         } else {
             header("HTTP/1.1 500 Internal Server Error");
-            echo "Image upload failed. Please try again.";
+            echo "Impossible de télécharger l'image. Réessayez.";
         }
     }
 }

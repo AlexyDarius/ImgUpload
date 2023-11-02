@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['image_id'])) {
         $stmt->execute();
         $stmt->close();
 
-        echo "Image deleted successfully!";
+        echo "Image supprimée !";
     } else {
-        echo "Image not found.";
+        echo "Image impossible à trouver.";
     }
 
     $conn->close();

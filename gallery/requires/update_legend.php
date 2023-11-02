@@ -17,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         // Database update successful
-        echo "Legend updated successfully!";
+        echo "Légende mise à jour avec succès !";
     } else {
         // Handle database update failure
         header("HTTP/1.1 500 Internal Server Error");
-        echo "Legend update failed. Please try again.";
+        echo "Impossible de metter à jour la légende. Réessayez.";
     }
 
     $stmt->close();

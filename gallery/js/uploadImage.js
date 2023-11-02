@@ -32,11 +32,11 @@ function uploadImage(event) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 // Image uploaded successfully
-                document.getElementById('status-message').textContent = 'Image uploaded successfully!';
+                document.getElementById('status-message').textContent = 'Image téléchargée avec succès !';
                 form.reset(); // Clear the form
             } else {
                 // Image upload failed
-                document.getElementById('status-message').textContent = 'Image upload failed. Please try again.';
+                document.getElementById('status-message').textContent = "Impossible de télécharger l'image. Réessayez.";
             }
         }
     };

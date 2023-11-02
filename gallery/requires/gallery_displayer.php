@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
         echo "</div>";
     }
 } else {
-    echo "No images found.";
+    echo "Aucune image trouvée.";
 }
 
 $conn->close();
